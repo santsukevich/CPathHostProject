@@ -8,6 +8,15 @@ public class CPath_UE5HostProject : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "CPathfinding" });
+		PublicDependencyModuleNames.AddRange(
+			[
+					"Core",
+					"CoreUObject",
+					"Engine",
+					"InputCore",
+					"HeadMountedDisplay", 
+					"CPathfinding"
+			]
+		);
 	}
 }

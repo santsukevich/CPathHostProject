@@ -45,8 +45,11 @@ class CPATHFINDING_API CPathVoxelDrawData
 
 public:
 
-	CPathVoxelDrawData()
-	{}
+	CPathVoxelDrawData():
+		Location(),
+		Extent(0)
+	{
+	}
 
 	CPathVoxelDrawData(FVector WorldLocation, float VoxelExtent, bool IsFree)
 		:

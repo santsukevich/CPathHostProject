@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "CPath_UE5HostProjectGameMode.h"
-#include "CPath_UE5HostProjectCharacter.h"
+//#include "CPath_UE5HostProjectCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "CPathVolume.h"
 #include "UObject/ConstructorHelpers.h"

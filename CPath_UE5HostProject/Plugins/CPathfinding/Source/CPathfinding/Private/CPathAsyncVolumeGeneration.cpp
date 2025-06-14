@@ -18,10 +18,10 @@ FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume, uin
 }
 
 // Sets default values
-FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume)
+FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume):
+	GenThreadID(0)
 {
 	VolumeRef = Volume;
-
 }
 
 FCPathAsyncVolumeGenerator::~FCPathAsyncVolumeGenerator()

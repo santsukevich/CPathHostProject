@@ -31,7 +31,7 @@ void UCPathDynamicObstacle::Activate(bool bReset)
 
 	Super::Activate();
 
-	TSubclassOf<ACPathVolume> Filter = ACPathVolume::StaticClass();
+	//TSubclassOf<ACPathVolume> Filter = ACPathVolume::StaticClass();
 	GetOwner()->GetOverlappingActors(OverlappigVolumes, ACPathVolume::StaticClass());
 
 	for (AActor* Volume : OverlappigVolumes)

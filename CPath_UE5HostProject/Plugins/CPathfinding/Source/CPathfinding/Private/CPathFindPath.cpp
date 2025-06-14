@@ -13,18 +13,22 @@
 #include "Engine/World.h"
 
 
-CPathAStar::CPathAStar()
+CPathAStar::CPathAStar():
+	PathStart(),
+	PathEnd(),
+	Volume(nullptr),
+	TargetLocation()
 {
 }
 
-CPathAStar::CPathAStar(ACPathVolume* VolumeRef, FVector Start, FVector End, uint32 SmoothingPasses, int32 UserData, float TimeLimit)
-	:
-	Volume(VolumeRef),
+CPathAStar::CPathAStar(ACPathVolume* VolumeRef, FVector Start, FVector End, uint32 SmoothingPasses, int32 UserData, float TimeLimit):
 	PathStart(Start),
 	PathEnd(End),
 	Smoothing(SmoothingPasses),
 	UsrData(UserData),
-	SearchTimeLimit(TimeLimit)
+	SearchTimeLimit(TimeLimit),
+	Volume(VolumeRef),
+	TargetLocation()
 {
 }
 

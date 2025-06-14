@@ -14,14 +14,15 @@ class CPATHFINDING_API CPathAStarNode
 {
 public:
 	CPathAStarNode();
-	CPathAStarNode(uint32 ID)
-		:
-		TreeID(ID)
-	{}
-	CPathAStarNode(uint32 ID, uint32 Data)
-		:
+	CPathAStarNode(uint32 ID):
 		TreeID(ID),
-		TreeUserData(Data)
+		WorldLocation()
+	{}
+
+	CPathAStarNode(uint32 ID, uint32 Data):
+		TreeID(ID),
+		TreeUserData(Data),
+		WorldLocation()
 	{}
 
 	uint32 TreeID = 0xFFFFFFFF;
@@ -72,19 +73,19 @@ struct FCPathNode
 {
 	GENERATED_BODY()
 
-		FCPathNode() {}
-	FCPathNode(FVector Location)
-		:
+	FCPathNode():
+		WorldLocation()
+	{}
+
+	FCPathNode(FVector Location):
 		WorldLocation(Location)
 	{}
 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CPath)
-		FVector WorldLocation;
+	FVector WorldLocation;
 
 	// Normalized vector pointing to next node. ZeroVector on last node.
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CPath)
-		FVector Normal = FVector(0, 0, 0);
-
-
+	FVector Normal = FVector(0, 0, 0);
 };
