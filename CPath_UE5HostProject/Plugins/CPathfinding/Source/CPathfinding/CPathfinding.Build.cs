@@ -7,6 +7,8 @@ public class CPathfinding : ModuleRules
 	public CPathfinding(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+		IWYUSupport = IWYUSupport.Full;
 		
 		PublicIncludePaths.AddRange(
 			[

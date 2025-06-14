@@ -4,15 +4,12 @@
 
 
 #include "CoreMinimal.h"
+#include "CPathDefines.h"
 #include "CPathNode.h"
 #include "HAL/Runnable.h"
 #include "HAL/RunnableThread.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
-#include <atomic>
-#include <CPathNode.h>
-#include <vector>
-#include <memory>
-#include <CPathDefines.h>
+#include "Engine/TimerHandle.h"
 #include "CPathFindPath.generated.h"
 
 
@@ -40,7 +37,7 @@ public:
 	bool bStop = false;
 
 	// Removes nodes in (nearly)straight sections, transforms to Blueprint exposed struct, optionally reverses it so that the path is from start to end and returns raw nodes.
-	void TransformToUserPath(CPathAStarNode* PathEndNode, TArray<FCPathNode>& UserPath, bool bReverse = true);
+	void TransformToUserPath(CPathAStarNode* PathEndNode, TArray<FCPathNode>& InUserPath, bool bReverse = true);
 
 	// This is used by FindPath if it failed null.
 	ECPathfindingFailReason FailReason = None;
@@ -109,7 +106,7 @@ public:
 	// With SmoothingPasses=0, the path will be very jagged since the graph is Discrete.
 	// With SmoothingPasses > 2 there is a potential loss of data, especially if a custom Cost function is used.
 	UFUNCTION(BlueprintCallable, Category = CPath, meta = (BlueprintInternalUseOnly = "true"))
-		static UCPathAsyncFindPath* FindPathAsync(class ACPathVolume* Volume, FVector StartLocation, FVector EndLocation, int SmoothingPasses = 2, int32 UserData = 0, float TimeLimit = 0.2f);
+		static UCPathAsyncFindPath* FindPathAsync(ACPathVolume* Volume, FVector StartLocation, FVector EndLocation, int SmoothingPasses = 2, int32 UserData = 0, float TimeLimit = 0.2f);
 
 	virtual void Activate() override;
 	virtual void BeginDestroy() override;
@@ -124,7 +121,7 @@ private:
 
 	// Thread objects
 	CPathAStar* AStar = nullptr;
-	class FCPathRunnableFindPath* RunnableFindPath = nullptr;
+	FCPathRunnableFindPath* RunnableFindPath = nullptr;
 	FRunnableThread* CurrentThread = nullptr;
 
 	friend class FCPathRunnableFindPath;
@@ -134,15 +131,15 @@ private:
 class CPATHFINDING_API FCPathRunnableFindPath : public FRunnable
 {
 public:
-	FCPathRunnableFindPath(class UCPathAsyncFindPath* AsyncNode);
+	FCPathRunnableFindPath(UCPathAsyncFindPath* AsyncNode);
 
-	virtual bool Init();
+	virtual bool Init() override;
 
-	virtual uint32 Run();
+	virtual uint32 Run() override;
 
-	virtual void Stop();
+	virtual void Stop() override;
 
-	virtual void Exit();
+	virtual void Exit() override;
 
 	//bool StopThread = false;
 
@@ -151,5 +148,5 @@ private:
 
 	bool bIncreasedPathfRunning = false;
 
-	class UCPathAsyncFindPath* AsyncActionRef = nullptr;
+	UCPathAsyncFindPath* AsyncActionRef = nullptr;
 };

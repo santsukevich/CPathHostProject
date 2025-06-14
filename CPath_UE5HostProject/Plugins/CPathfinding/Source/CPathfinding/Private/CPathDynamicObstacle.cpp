@@ -106,6 +106,7 @@ void UCPathDynamicObstacle::AddIndexesToUpdate(ACPathVolume* Volume)
 void UCPathDynamicObstacle::EndPlay(EEndPlayReason::Type Reason)
 {
 	Deactivate();
+	Super::EndPlay(Reason);
 }
 
 

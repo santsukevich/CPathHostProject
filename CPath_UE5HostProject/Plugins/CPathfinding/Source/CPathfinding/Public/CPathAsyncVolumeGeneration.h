@@ -10,12 +10,8 @@ class ACPathVolume;
 class CPathOctree;
 
 
-
-
 class CPATHFINDING_API FCPathAsyncVolumeGenerator : public FRunnable
 {
-
-
 public:
 	// Geneated trees in range Start(inclusive) - End(not inclusive). If Obstacles = true, it takes from Volume->TreesToRegenerate, if not, it takes from Volume->Octrees (default)
 	FCPathAsyncVolumeGenerator(ACPathVolume* Volume, uint32 StartIndex, uint32 EndIndex, uint8 ThreadID, FString ThreadName, bool Obstacles = false);
@@ -23,15 +19,15 @@ public:
 	// Not used for now
 	FCPathAsyncVolumeGenerator(ACPathVolume* Volume);
 
-	~FCPathAsyncVolumeGenerator();
+	virtual ~FCPathAsyncVolumeGenerator() override;
 
-	virtual bool Init();
+	virtual bool Init() override;
 
-	virtual uint32 Run();
+	virtual uint32 Run() override;
 
-	virtual void Stop();
+	virtual void Stop() override;
 
-	virtual void Exit();
+	virtual void Exit() override;
 
 	// The main generating function, generated/regenerates the whole octree at given index
 	void RefreshTree(uint32 OuterIndex);
@@ -59,8 +55,4 @@ protected:
 
 	// Gets called by RefreshTree. Returns true if ANY child is free
 	bool RefreshTreeRec(CPathOctree* OctreeRef, uint32 Depth, FVector TreeLocation);
-
-
-public:
-
 };

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPathDefines.generated.h"
 
 // TreeID settings
 // If you change these, you will also need to change some masks in functions like ReplaceDepth, ExtractDepth, etc
@@ -13,9 +14,9 @@
 #define MAX_DEPTH 3
 
 // Time measurement macros
-#define TIMENOW std::chrono::steady_clock::now()
+#define TIMENOW FPlatformTime::Cycles64()
 // this is in ms
-#define TIMEDIFF(BEGIN, END) ((double)std::chrono::duration_cast<std::chrono::nanoseconds>(END - BEGIN).count())/1000000.0 
+#define TIMEDIFF(BEGIN, END) FPlatformTime::ToMilliseconds64(END - BEGIN) 
 
 // Uncomment these or define somwhere else to see performance logs
 //#define LOG_GENERATORS 1

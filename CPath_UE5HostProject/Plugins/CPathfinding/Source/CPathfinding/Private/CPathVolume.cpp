@@ -11,12 +11,7 @@
 #include "CPathDynamicObstacle.h"
 #include "CPathNode.h"
 #include "TimerManager.h"
-#include "Engine/Selection.h"
-#include "GenericPlatform/GenericPlatformAtomics.h"
-
-
-
-
+#include "Engine/World.h"
 
 ACPathVolume::ACPathVolume()
 {
@@ -25,17 +20,12 @@ ACPathVolume::ACPathVolume()
 	VolumeBox = CreateDefaultSubobject<UBoxComponent>("VolumeBox");
 	RootComponent = VolumeBox;
 	VolumeBox->InitBoxExtent(FVector(VoxelSize));
-
-#if WITH_EDITOR
-
-
-#endif
+	
 	DepthsToDraw = { true, true, true, true };
-
-
+	
+	
 	FVector Location = GetActorLocation() - VolumeBox->GetScaledBoxExtent() + VoxelSize;
 	DrawDebugBox(GetWorld(), Location, FVector(VoxelSize), FColor::White, true);
-
 }
 
 void ACPathVolume::DebugDrawNeighbours(FVector WorldLocation)
@@ -199,7 +189,6 @@ void ACPathVolume::BeginPlay()
 bool ACPathVolume::GenerateGraph()
 {
 	GenerationStarted = true;
-	PrintGenerationTime = true;
 
 	UBoxComponent* tempBox = Cast<UBoxComponent>(GetRootComponent());
 	tempBox->UpdateOverlaps();
@@ -763,26 +752,21 @@ CPathOctree* ACPathVolume::FindNeighbourByID(uint32 TreeID, ENeighbourDirection 
 		ReplaceDepth(NeighbourID, Depth);
 		return Neighbour;
 	}
-	else
-	{	// Getting the neighbour of parent Octree and then its correct child
-		ReplaceDepth(TreeID, Depth - 1);
-		CPathOctree* NeighbourOfParent = FindNeighbourByID(TreeID, Direction, NeighbourID);
-		if (NeighbourOfParent)
+	// Getting the neighbour of parent Octree and then its correct child
+	ReplaceDepth(TreeID, Depth - 1);
+	CPathOctree* NeighbourOfParent = FindNeighbourByID(TreeID, Direction, NeighbourID);
+	if (NeighbourOfParent)
+	{
+		if (NeighbourOfParent->Children)
 		{
-			if (NeighbourOfParent->Children)
-			{
-				// Look at the description of LookupTable_NeighbourChildIndex
-				NeighbourChildIndex = -1 * NeighbourChildIndex - 1;
-				ReplaceDepth(NeighbourID, Depth);
-				ReplaceChildIndex(NeighbourID, Depth, NeighbourChildIndex);
-				return &NeighbourOfParent->Children[NeighbourChildIndex];
-			}
-			else
-			{
-				// NeighbourID is already correct from calling FindNeighbourByID
-				return NeighbourOfParent;
-			}
+			// Look at the description of LookupTable_NeighbourChildIndex
+			NeighbourChildIndex = -1 * NeighbourChildIndex - 1;
+			ReplaceDepth(NeighbourID, Depth);
+			ReplaceChildIndex(NeighbourID, Depth, NeighbourChildIndex);
+			return &NeighbourOfParent->Children[NeighbourChildIndex];
 		}
+		// NeighbourID is already correct from calling FindNeighbourByID
+		return NeighbourOfParent;
 	}
 
 	return nullptr;

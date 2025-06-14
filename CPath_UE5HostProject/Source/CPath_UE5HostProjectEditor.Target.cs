@@ -8,6 +8,7 @@ public class CPath_UE5HostProjectEditorTarget : TargetRules
 	{
 		Type = TargetType.Editor;
 		DefaultBuildSettings = BuildSettingsVersion.Latest;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		ExtraModuleNames.Add("CPath_UE5HostProject");
 	}
 }

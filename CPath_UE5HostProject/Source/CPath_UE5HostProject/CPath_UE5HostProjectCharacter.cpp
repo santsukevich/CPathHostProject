@@ -54,7 +54,7 @@ ACPath_UE5HostProjectCharacter::ACPath_UE5HostProjectCharacter()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void ACPath_UE5HostProjectCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void ACPath_UE5HostProjectCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);

@@ -2,15 +2,15 @@
 
 #include "CPathFindPath.h"
 #include "CPathVolume.h"
-#include <thread>
+#include "Algo/Reverse.h"
+#include "TimerManager.h"
+#include "Engine/World.h"
+#include "Engine/HitResult.h"
 #include <queue>
 #include <deque>
 #include <vector>
 #include <unordered_set>
 #include <memory>
-#include "Algo/Reverse.h"
-#include "TimerManager.h"
-#include "Engine/World.h"
 
 
 CPathAStar::CPathAStar():
@@ -381,7 +381,7 @@ uint32 FCPathRunnableFindPath::Run()
 	// Waiting for the volume to finish generating
 	while ((AsyncActionRef->AStar->Volume->GeneratorsRunning.load() > 0 || !AsyncActionRef->AStar->Volume->InitialGenerationCompleteAtom.load()) && !AsyncActionRef->AStar->bStop)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(25));
+		FPlatformProcess::Sleep(0.025);
 		SleepCounter += 25;
 
 		// Cancel request for path if idled for 5 seconds or more

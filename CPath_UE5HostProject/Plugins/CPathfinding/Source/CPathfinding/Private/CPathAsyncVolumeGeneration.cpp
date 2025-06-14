@@ -3,8 +3,6 @@
 
 #include "CPathAsyncVolumeGeneration.h"
 #include "CPathVolume.h"
-#include "Engine/World.h"
-#include <thread>
 
 FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume, uint32 StartIndex, uint32 EndIndex, uint8 ThreadID, FString ThreadName, bool Obstacles)
 	:
@@ -39,12 +37,12 @@ bool FCPathAsyncVolumeGenerator::Init()
 uint32 FCPathAsyncVolumeGenerator::Run()
 {
 	bIncreasedGenRunning = true;
-	VolumeRef->GeneratorsRunning++;
+	++VolumeRef->GeneratorsRunning;
 
 	// Waiting for pathfinders to finish.
 	// Generators have priority over pathfinders, so we block further pathfinders from starting by incrementing GeneratorsRunning first	
 	while (VolumeRef->PathfindersRunning.load() > 0 && !bStop)
-		std::this_thread::sleep_for(std::chrono::milliseconds(25));
+		FPlatformProcess::Sleep(0.025);
 
 #ifdef LOG_GENERATORS
 	auto GenerationStart = TIMENOW;
@@ -56,11 +54,11 @@ uint32 FCPathAsyncVolumeGenerator::Run()
 		{
 			auto StartIter = VolumeRef->TreesToRegenerate.begin();
 			for (uint32 i = 0; i < FirstIndex; i++)
-				StartIter++;
+				++StartIter;
 
 			auto EndIter = StartIter;
 			for (uint32 i = FirstIndex; i < LastIndex; i++)
-				EndIter++;
+				++EndIter;
 
 			for (auto Iter = StartIter; Iter != EndIter && !bStop; Iter++)
 			{
@@ -89,7 +87,7 @@ uint32 FCPathAsyncVolumeGenerator::Run()
 #endif
 
 	if (bIncreasedGenRunning)
-		VolumeRef->GeneratorsRunning--;
+		--VolumeRef->GeneratorsRunning;
 	bIncreasedGenRunning = false;
 	return 0;
 }
@@ -99,7 +97,7 @@ void FCPathAsyncVolumeGenerator::Stop()
 
 	// Preventing a potential deadlock if the process is killed without waiting
 	if (bIncreasedGenRunning)
-		VolumeRef->GeneratorsRunning--;
+		--VolumeRef->GeneratorsRunning;
 
 	bIncreasedGenRunning = false;
 }
@@ -132,7 +130,7 @@ bool FCPathAsyncVolumeGenerator::RefreshTreeRec(CPathOctree* OctreeRef, uint32 D
 		OctreeRef->Children = nullptr;
 		return true;
 	}
-	else if (++Depth <= (uint32)VolumeRef->OctreeDepth)
+	if (++Depth <= (uint32)VolumeRef->OctreeDepth)
 	{
 		float HalfSize = VolumeRef->GetVoxelSizeByDepth(Depth) / 2.f;
 
@@ -150,13 +148,9 @@ bool FCPathAsyncVolumeGenerator::RefreshTreeRec(CPathOctree* OctreeRef, uint32 D
 		{
 			return true;
 		}
-		else
-		{
-			delete[] OctreeRef->Children;
-			OctreeRef->Children = nullptr;
-			return false;
-		}
-
+		delete[] OctreeRef->Children;
+		OctreeRef->Children = nullptr;
+		return false;
 	}
 	return false;
 }

@@ -4,17 +4,15 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "WorldCollision.h"
-#include <memory>
-#include <chrono>
-#include <vector>
-#include <atomic>
-#include <set>
-#include <list>
-#include "PhysicsInterfaceTypesCore.h"
 #include "CPathDefines.h"
 #include "CPathOctree.h"
 #include "CPathNode.h"
 #include "CPathAsyncVolumeGeneration.h"
+#include <memory>
+#include <vector>
+#include <atomic>
+#include <set>
+#include <list>
 #include "CPathVolume.generated.h"
 
 
@@ -243,7 +241,7 @@ public:
 	std::atomic_bool InitialGenerationCompleteAtom = false;
 
 	// This is filled by DynamicObstacle component
-	std::set<class UCPathDynamicObstacle*> TrackedDynamicObstacles;
+	std::set<UCPathDynamicObstacle*> TrackedDynamicObstacles;
 
 	// ----------- Other helper functions ---------------------
 
@@ -336,9 +334,4 @@ protected:
 
 	// -------- DEBUGGING -----
 	std::vector<CPathVoxelDrawData> PreviousDrawAroundLocationData;
-
-	std::chrono::steady_clock::time_point GenerationStart;
-	bool PrintGenerationTime = false;
-
-
 };

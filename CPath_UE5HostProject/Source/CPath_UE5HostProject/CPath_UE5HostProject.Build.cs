@@ -7,6 +7,8 @@ public class CPath_UE5HostProject : ModuleRules
 	public CPath_UE5HostProject(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+		IWYUSupport = IWYUSupport.Full;
 
 		PublicDependencyModuleNames.AddRange(
 			[
