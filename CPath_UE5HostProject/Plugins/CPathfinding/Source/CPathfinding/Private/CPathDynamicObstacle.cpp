@@ -11,18 +11,6 @@ UCPathDynamicObstacle::UCPathDynamicObstacle()
 	PrimaryComponentTick.bCanEverTick = false;
 	PrimaryComponentTick.bStartWithTickEnabled = false;
 	bAutoActivate = false;
-
-	if (GetOwner())
-	{
-		if (!GetOwner()->IsRootComponentMovable())
-		{
-			UE_LOG(LogTemp, Warning, TEXT("CPath - Dynamic obstacle '%s' is not Movable."), *GetOwner()->GetName());
-		}
-		if (ActivateOnBeginPlay)
-			GetOwner()->bGenerateOverlapEventsDuringLevelStreaming = true;
-	}
-
-	// ...
 }
 
 
@@ -113,14 +101,26 @@ void UCPathDynamicObstacle::EndPlay(EEndPlayReason::Type Reason)
 void UCPathDynamicObstacle::BeginPlay()
 {
 	Super::BeginPlay();
+	if (!GetOwner())
+	{
+		UE_LOG(LogTemp, Error, TEXT("CPath - Dynamic obstacle component '%s' has no valid owner."), *GetName());
+		return;
+	}
+
+	if (!GetOwner()->IsRootComponentMovable())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CPath - Dynamic obstacle '%s' is not Movable."), *GetOwner()->GetName());
+	}
+	
 	GetOwner()->OnActorBeginOverlap.AddDynamic(this, &UCPathDynamicObstacle::OnBeginOverlap);
 	GetOwner()->OnActorEndOverlap.AddDynamic(this, &UCPathDynamicObstacle::OnBeginOverlap);
+	
 	if (ActivateOnBeginPlay)
 	{
+		GetOwner()->bGenerateOverlapEventsDuringLevelStreaming = true;
 		Activate();
 	}
 }
-
 
 
 void UCPathDynamicObstacle::OnBeginOverlap(AActor* Owner, AActor* OtherActor)
