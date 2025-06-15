@@ -16,17 +16,14 @@ UCPathDynamicObstacle::UCPathDynamicObstacle()
 
 void UCPathDynamicObstacle::Activate(bool bReset)
 {
-
 	Super::Activate();
-
-	TSubclassOf<ACPathVolume> Filter = ACPathVolume::StaticClass();
+	
 	GetOwner()->GetOverlappingActors(OverlappigVolumes, ACPathVolume::StaticClass());
 
 	for (AActor* Volume : OverlappigVolumes)
 	{
 		Cast<ACPathVolume>(Volume)->TrackedDynamicObstacles.insert(this);
 	}
-
 }
 
 void UCPathDynamicObstacle::Deactivate()

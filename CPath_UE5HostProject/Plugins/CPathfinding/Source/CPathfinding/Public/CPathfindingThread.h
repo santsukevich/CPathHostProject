@@ -16,15 +16,15 @@ class CPATHFINDING_API FCPathfindingThread : public FRunnable
 {
 public:
 	FCPathfindingThread(class ACPathCore* Producer, int Index);
-	~FCPathfindingThread();
+	virtual ~FCPathfindingThread() override;
 
-	virtual bool Init();
+	virtual bool Init() override;
 
-	virtual uint32 Run();
+	virtual uint32 Run() override;
 
-	virtual void Stop();
+	virtual void Stop() override;
 
-	virtual void Exit();
+	virtual void Exit() override;
 
 
 

@@ -23,15 +23,15 @@ public:
 	// Not used for now
 	FCPathAsyncVolumeGenerator(ACPathVolume* Volume);
 
-	~FCPathAsyncVolumeGenerator();
+	virtual ~FCPathAsyncVolumeGenerator() override;
 
-	virtual bool Init();
+	virtual bool Init() override;
 
-	virtual uint32 Run();
+	virtual uint32 Run() override;
 
-	virtual void Stop();
+	virtual void Stop() override;
 
-	virtual void Exit();
+	virtual void Exit() override;
 
 	bool HasFinishedWorking();
 
@@ -68,7 +68,4 @@ protected:
 	bool ShouldWakeUp();
 
 	TFunctionRef< bool()> WakeUpCondition;
-
-public:
-
 };

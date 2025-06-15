@@ -36,7 +36,7 @@ public:
 	~CPathOctree()
 	{
 		delete[] Children;
-	};
+	}
 };
 
 // Class used to remember data needed to draw a debug voxel 
@@ -45,8 +45,9 @@ class CPATHFINDING_API CPathVoxelDrawData
 
 public:
 
-	CPathVoxelDrawData()
-	{}
+	CPathVoxelDrawData(): Location(), Extent(0)
+	{
+	}
 
 	CPathVoxelDrawData(FVector WorldLocation, float VoxelExtent, bool IsFree)
 		:

@@ -2,6 +2,7 @@
 
 
 #include "CPathVolumeGroundPrio.h"
+#include "Engine/World.h"
 
 void ACPathVolumeGroundPrio::CalcFitness(CPathAStarNode& Node, FVector TargetLocation, int32 UserData)
 {

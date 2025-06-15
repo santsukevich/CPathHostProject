@@ -19,8 +19,8 @@
 #define TIMEDIFF(BEGIN, END) FPlatformTime::ToMilliseconds64(END - BEGIN) 
 
 // Uncomment these or define somewhere else to see performance logs
-#define LOG_GENERATORS 1
-#define LOG_PATHFINDERS 1 // set it to 2 for more async logs
+// #define LOG_GENERATORS 1
+// #define LOG_PATHFINDERS 1 // set it to 2 for more async logs
 
 enum ENeighbourDirection
 {

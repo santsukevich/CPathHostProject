@@ -5,11 +5,9 @@
 
 #include "CoreMinimal.h"
 #include "CPathNode.h"
-#include "HAL/Runnable.h"
 #include "HAL/RunnableThread.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
 #include <atomic>
-#include <vector>
 #include <memory>
 #include <CPathDefines.h>
 #include "CPathFindPath.generated.h"
@@ -70,7 +68,7 @@ private:
 	void SmoothenPath(CPathAStarNode* PathEndNode);
 
 	// Removes nodes in (nearly)straight sections, transforms to Blueprint exposed struct, optionally reverses it so that the path is from start to end and returns raw nodes.
-	void TransformToUserPath(CPathAStarNode* PathEndNode, TArray<FCPathNode>& UserPath, bool bReverse = true);
+	void TransformToUserPath(CPathAStarNode* PathEndNode, TArray<FCPathNode>& InUserPath, bool bReverse = true);
 
 	friend class UCPathAsyncFindPath;
 	friend class FCPathRunnableFindPath;

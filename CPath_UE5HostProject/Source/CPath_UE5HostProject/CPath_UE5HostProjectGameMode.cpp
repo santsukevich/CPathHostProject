@@ -4,7 +4,6 @@
 #include "CPath_UE5HostProjectCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "CPathVolume.h"
-#include "UObject/ConstructorHelpers.h"
 
 ACPath_UE5HostProjectGameMode::ACPath_UE5HostProjectGameMode()
 {

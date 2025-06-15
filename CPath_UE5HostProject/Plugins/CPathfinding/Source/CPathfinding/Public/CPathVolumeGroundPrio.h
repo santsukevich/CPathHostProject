@@ -16,7 +16,7 @@ class CPATHFINDING_API ACPathVolumeGroundPrio : public ACPathVolume
 public:
 	virtual void CalcFitness(CPathAStarNode& Node, FVector TargetLocation, int32 UserData) override;
 
-	virtual bool RecheckOctreeAtDepth(CPathOctree* OctreeRef, FVector TreeLocation, uint32 Depth);
+	virtual bool RecheckOctreeAtDepth(CPathOctree* OctreeRef, FVector TreeLocation, uint32 Depth) override;
 
 	FORCEINLINE bool ExtractIsGroundFromData(uint32 TreeUserData)
 	{

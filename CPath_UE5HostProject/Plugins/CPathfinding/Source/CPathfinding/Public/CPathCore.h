@@ -23,15 +23,14 @@ class CPATHFINDING_API ACPathCore : public AActor
 
 	friend class FCPathfindingThread;
 public:
-
-	~ACPathCore();
+	virtual ~ACPathCore() override;
 
 	
 	static ACPathCore* GetInstance(UWorld* World);
 	static bool DoesInstanceExist();
 	static void EnableNewInstanceCreation();
 
-	virtual void Tick(float DeltaSeconds) override;
+	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
 	virtual void BeginDestroy() override;
 	virtual void EndPlay(EEndPlayReason::Type EndPlayReason) override;

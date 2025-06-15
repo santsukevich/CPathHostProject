@@ -8,6 +8,7 @@
 #include <memory>
 #include "NewThreadingTest.generated.h"
 
+class ACPathVolume;
 
 UCLASS()
 class CPATH_UE5HOSTPROJECT_API ANewThreadingTest : public AActor
@@ -41,7 +42,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	class ACPathVolume* VolumeRef = nullptr;
+
+	UPROPERTY()
+	TObjectPtr<ACPathVolume> VolumeRef = nullptr;
 
 	static uint32 RequestsSent;
 	static uint32 RequestsReceived;

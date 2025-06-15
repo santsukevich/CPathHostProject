@@ -18,13 +18,18 @@ public:
 	CPathAStarNode();
 	CPathAStarNode(uint32 ID)
 		:
-		TreeID(ID)
-	{}
+		TreeID(ID),
+		WorldLocation()
+	{
+	}
+
 	CPathAStarNode(uint32 ID, uint32 Data)
 		:
 		TreeID(ID),
-		TreeUserData(Data)
-	{}
+		TreeUserData(Data),
+		WorldLocation()
+	{
+	}
 
 	uint32 TreeID = 0xFFFFFFFF;
 
@@ -74,11 +79,17 @@ struct CPATHFINDING_API FCPathNode
 {
 	GENERATED_BODY()
 
-		FCPathNode() {}
+	FCPathNode()
+		:
+		WorldLocation()
+	{
+	}
+
 	FCPathNode(FVector Location)
 		:
 		WorldLocation(Location)
-	{}
+	{
+	}
 
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = CPath)

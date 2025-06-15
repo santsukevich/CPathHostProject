@@ -3,7 +3,6 @@
 
 #include "CPathAsyncVolumeGeneration.h"
 #include "CPathVolume.h"
-#include "GenericPlatform/GenericPlatformProcess.h"
 #include "Templates/Function.h"
 #include "Engine/World.h"
 
@@ -20,11 +19,10 @@ FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume, uin
 
 // Sets default values
 FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume)
-	:
-	WakeUpCondition([this]() { return WakeUpCondition(); })
+	: GenThreadID(0),
+	  WakeUpCondition([this]() { return WakeUpCondition(); })
 {
 	VolumeRef = Volume;
-	
 }
 
 FCPathAsyncVolumeGenerator::~FCPathAsyncVolumeGenerator()

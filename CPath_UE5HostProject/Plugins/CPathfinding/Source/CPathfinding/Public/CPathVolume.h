@@ -10,7 +10,6 @@
 #include <atomic>
 #include <set>
 #include <list>
-#include "PhysicsInterfaceTypesCore.h"
 #include "CPathDefines.h"
 #include "CPathOctree.h"
 #include "CPathNode.h"
@@ -282,7 +281,7 @@ public:
 			return FindTreeByID(TreeId, Depth);
 		}
 		return nullptr;
-	};
+	}
 
 	// Returns world location of a voxel at this TreeID. This returns CENTER of the voxel
 	FORCEINLINE FVector WorldLocationFromTreeID(uint32 TreeID) const
@@ -305,7 +304,7 @@ public:
 		uint32 X = OuterIndex / (NodeCount[1] * NodeCount[2]);
 		OuterIndex -= X * NodeCount[1] * NodeCount[2];
 		return FVector(X, OuterIndex / NodeCount[2], OuterIndex % NodeCount[2]);
-	};
+	}
 
 	// Creates TreeID for AsyncOverlapByChannel
 	FORCEINLINE uint32 CreateTreeID(uint32 Index, uint32 Depth) const
@@ -351,7 +350,7 @@ public:
 		checkf(ChildIndex < 8, TEXT("CPATH - Graph Generation:::Child Index can be up to 7"));
 		ChildIndex <<= (Depth - 1) * 3 + DEPTH_0_BITS + 2;
 		TreeID |= ChildIndex;
-	};
+	}
 
 	// Replaces child index at given depth
 	FORCEINLINE void ReplaceChildIndex(uint32& TreeID, uint32 Depth, uint32 ChildIndex)

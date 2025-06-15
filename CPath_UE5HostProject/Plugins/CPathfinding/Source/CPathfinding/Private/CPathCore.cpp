@@ -8,7 +8,7 @@
 #include "Engine/World.h"
 
 // Sets default values
-ACPathCore::ACPathCore()
+ACPathCore::ACPathCore(): ExpectedThreadCount(0)
 {
 	PrimaryActorTick.bCanEverTick = true;
 }

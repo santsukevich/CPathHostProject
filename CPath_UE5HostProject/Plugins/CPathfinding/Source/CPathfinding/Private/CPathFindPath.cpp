@@ -16,7 +16,7 @@
 // --------------------------------------------------------
 // ---------------- A Star mehtods ------------------------
 
-CPathAStar::CPathAStar()
+CPathAStar::CPathAStar(): TargetLocation(), CurrentVolumeRef(nullptr)
 {
 }
 

@@ -16,10 +16,6 @@
 #include "CPathCore.h"
 #include "Engine/Selection.h"
 #include "Engine/World.h"
-#include "GenericPlatform/GenericPlatformAtomics.h"
-
-
-
 
 
 ACPathVolume::ACPathVolume()
@@ -860,7 +856,7 @@ void ACPathVolume::FindLeafsOnSide(CPathOctree* Tree, uint32 TreeID, ENeighbourD
 
 
 
-void ACPathVolume::PerformRandomBenchmark(uint32 FindPathUserData, float FindPathTimeLimit)
+void ACPathVolume::PerformRandomBenchmark(uint32 UserData, float TimeLimit)
 {
 	if (IsAsyncBenchmark)
 	{
@@ -887,7 +883,7 @@ void ACPathVolume::PerformRandomBenchmark(uint32 FindPathUserData, float FindPat
 		FVector PathStart = FMath::RandPointInBox(Box);
 		FVector PathEnd = FMath::RandPointInBox(Box);
 
-		FCPathResult Result = FindPathSynchronous(PathStart, PathEnd, 0, FindPathUserData, FindPathTimeLimit);
+		FCPathResult Result = FindPathSynchronous(PathStart, PathEnd, 0, UserData, TimeLimit);
 
 		ResultCounter[Result.FailReason]++;
 		if (Result.FailReason == ECPathfindingFailReason::None)

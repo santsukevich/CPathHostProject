@@ -2,7 +2,7 @@
 
 #include "CPathNode.h"
 
-CPathAStarNode::CPathAStarNode()
+CPathAStarNode::CPathAStarNode(): WorldLocation()
 {
 }
 
