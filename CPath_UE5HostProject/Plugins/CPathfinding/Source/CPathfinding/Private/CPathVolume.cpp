@@ -1,7 +1,6 @@
 // Copyright Dominik Trautman. Published in 2022. All Rights Reserved.
 
 #include "CPathVolume.h"
-
 #include "DrawDebugHelpers.h"
 #include "Components/BoxComponent.h"
 #include <queue>
@@ -16,6 +15,7 @@
 #include "CPathFindPath.h"
 #include "CPathCore.h"
 #include "Engine/Selection.h"
+#include "Engine/World.h"
 #include "GenericPlatform/GenericPlatformAtomics.h"
 
 
@@ -210,7 +210,6 @@ void ACPathVolume::BeginPlay()
 bool ACPathVolume::GenerateGraph()
 {
 	GenerationStarted = true;
-	PrintGenerationTime = true;
 
 	UBoxComponent* tempBox = Cast<UBoxComponent>(GetRootComponent());
 	tempBox->UpdateOverlaps();

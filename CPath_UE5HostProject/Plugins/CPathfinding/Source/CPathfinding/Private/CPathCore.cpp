@@ -3,9 +3,9 @@
 
 #include "CPathCore.h"
 #include "CPathFindPath.h"
-#include "Delegates/Delegate.h"
-
 #include "CPathfindingThread.h"
+#include "Delegates/Delegate.h"
+#include "Engine/World.h"
 
 // Sets default values
 ACPathCore::ACPathCore()

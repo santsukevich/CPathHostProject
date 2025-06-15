@@ -6,7 +6,6 @@
 #include "HAL/Event.h"
 #include "WorldCollision.h"
 #include <memory>
-#include <chrono>
 #include <vector>
 #include <atomic>
 #include <set>
@@ -508,9 +507,4 @@ protected:
 
 	// -------- DEBUGGING -----
 	std::vector<CPathVoxelDrawData> PreviousDrawAroundLocationData;
-
-	std::chrono::steady_clock::time_point GenerationStart;
-	bool PrintGenerationTime = false;
-
-
 };

@@ -2,7 +2,6 @@
 
 #include "CPathFindPath.h"
 #include "CPathVolume.h"
-#include <thread>
 #include <queue>
 #include <deque>
 #include <vector>

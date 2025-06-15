@@ -6,7 +6,6 @@
 #include "GenericPlatform/GenericPlatformProcess.h"
 #include "Templates/Function.h"
 #include "Engine/World.h"
-#include <thread>
 
 FCPathAsyncVolumeGenerator::FCPathAsyncVolumeGenerator(ACPathVolume* Volume, uint32 StartIndex, uint32 EndIndex, uint8 ThreadID, FString ThreadName, bool Obstacles)
 	:
@@ -49,7 +48,7 @@ uint32 FCPathAsyncVolumeGenerator::Run()
 	// Waiting for pathfinders to finish.
 	// Generators have priority over pathfinders, so we block further pathfinders from starting by incrementing GeneratorsRunning first	
 	while (!ShouldWakeUp())
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		FPlatformProcess::Sleep(0.005);
 	
 		
 	if(RequestedKill.load())
