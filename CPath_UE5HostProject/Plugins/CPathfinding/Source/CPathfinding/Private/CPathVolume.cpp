@@ -14,7 +14,6 @@
 #include "TimerManager.h"
 #include "CPathFindPath.h"
 #include "CPathCore.h"
-#include "Engine/Selection.h"
 #include "Engine/World.h"
 
 
@@ -364,6 +363,7 @@ void ACPathVolume::EndPlay(EEndPlayReason::Type EndPlayReason)
 		FGenericPlatformProcess::ReturnSynchEventToPool(GenerationFinishedSemaphore);
 		GenerationFinishedSemaphore = nullptr;
 	}
+	Super::EndPlay(EndPlayReason);
 }
 
 bool ACPathVolume::FindPathAsync(UObject* CallingObject, const FName& InFunctionName, FVector Start, FVector End, uint32 SmoothingPasses, int32 UserData, float TimeLimit, bool RequestRawPath, bool RequestUserPath)

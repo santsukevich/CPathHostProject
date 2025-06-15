@@ -5,7 +5,6 @@
 
 #include "CoreMinimal.h"
 #include "CPathNode.h"
-#include "HAL/RunnableThread.h"
 #include "Kismet/BlueprintAsyncActionBase.h"
 #include <atomic>
 #include <memory>

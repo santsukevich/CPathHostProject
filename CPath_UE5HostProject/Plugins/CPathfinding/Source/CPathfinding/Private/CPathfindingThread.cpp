@@ -4,7 +4,6 @@
 #include "CPathfindingThread.h"
 #include "CPathVolume.h"
 #include "CPathFindPath.h"
-#include "Engine/World.h"
 #include "GenericPlatform/GenericPlatformProcess.h"
 #include "CPathCore.h"
 

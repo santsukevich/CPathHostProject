@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "CPathNode.h"
-#include <memory>
 #include "NewThreadingTest.generated.h"
 
 class ACPathVolume;

@@ -66,6 +66,4 @@ protected:
 	bool RefreshTreeRec(CPathOctree* OctreeRef, uint32 Depth, FVector TreeLocation);
 
 	bool ShouldWakeUp();
-
-	TFunctionRef< bool()> WakeUpCondition;
 };

@@ -2,7 +2,6 @@
 
 
 #include "NewThreadingTest.h"
-#include "CPathCore.h"
 #include "CPathVolume.h"
 
 // Sets default values
