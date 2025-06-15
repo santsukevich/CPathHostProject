@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CPathDefines.generated.h"
 
 // TreeID settings
 // If you change these, you will also need to change some masks in functions like ReplaceDepth, ExtractDepth, etc

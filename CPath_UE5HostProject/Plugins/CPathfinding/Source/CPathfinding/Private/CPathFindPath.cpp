@@ -11,6 +11,7 @@
 #include "Algo/Reverse.h"
 #include "TimerManager.h"
 #include "Engine/World.h"
+#include "Engine/HitResult.h"
 
 // --------------------------------------------------------
 // --------------------------------------------------------

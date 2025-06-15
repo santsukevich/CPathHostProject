@@ -8,7 +8,7 @@ public class CPath_UE5HostProjectTarget : TargetRules
 	public CPath_UE5HostProjectTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-		DefaultBuildSettings = BuildSettingsVersion.V5;
+		DefaultBuildSettings = BuildSettingsVersion.Latest;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 		ExtraModuleNames.Add("CPath_UE5HostProject");
 	}
